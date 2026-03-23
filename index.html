@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pay Now</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff00cc, #3333ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      width: 320px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      color: #ff00cc;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #444;
+    }
+
+    .qr img {
+      width: 100%;
+      border-radius: 10px;
+      margin: 15px 0;
+    }
+
+    .btn {
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    .whatsapp {
+      background: #25D366;
+      color: white;
+    }
+
+    .whatsapp:hover {
+      background: #1ebe5d;
+    }
+
+    .download {
+      background: #000;
+      color: white;
+    }
+
+    .download:hover {
+      background: #333;
+    }
+
+    .note {
+      font-size: 12px;
+      margin-top: 10px;
+      color: gray;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <h2>Pay Now</h2>
+    <p>Scan QR and complete your payment</p>
+
+    <div class="qr">
+      <img id="qrImage" src="https://i.ibb.co/GQ8Yzw1s/20260310-134821.jpg" alt="QR Code">
+    </div>
+
+    <button class="btn whatsapp" onclick="sendWhatsApp()">
+      Payment Done
+    </button>
+
+    <button class="btn download" onclick="downloadQR()">
+      Download QR
+    </button>
+
+    <p class="note">
+      After payment, send screenshot on WhatsApp
+    </p>
+  </div>
+
+  <script>
+    function sendWhatsApp() {
+      let number = "918493824856"; 
+      let message = "Hello, I have completed the payment. Here is my screenshot.";
+      let url = "https://wa.me/" + number + "?text=" + encodeURIComponent(message);
+      window.open(url, "_blank");
+    }
+
+    function downloadQR() {
+      const link = document.createElement('a');
+      link.href = document.getElementById('qrImage').src;
+      link.download = 'payment-qr.jpg';
+      link.click();
+    }
+  </script>
+
+</body>
+</html>
