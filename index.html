@@ -148,15 +148,24 @@
       link.download = 'payment-qr.jpg';
       link.click();
     }
-  </script>
+  <script>
+  function showFailModal() {
+    document.getElementById("failModal").style.display = "flex";
+  }
 
-</body>
-</html>      const link = document.createElement('a');
-      link.href = document.getElementById('qrImage').src;
-      link.download = 'payment-qr.jpg';
-      link.click();
-    }
-  </script>
+  function closeModal() {
+    document.getElementById("failModal").style.display = "none";
+  }
 
+  function downloadQR() {
+    const img = document.getElementById("qrImage").src;
+    const link = document.createElement("a");
+    link.href = img;
+    link.download = "payment-qr.jpg";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+</script>
 </body>
 </html>
