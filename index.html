@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Pay Now</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <style>
     body {
       margin: 0;
@@ -27,12 +27,6 @@
 
     h2 {
       color: #ff00cc;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 14px;
-      color: #444;
     }
 
     .qr img {
@@ -48,32 +42,66 @@
       border-radius: 8px;
       font-size: 16px;
       cursor: pointer;
-      margin-top: 8px;
-    }
-
-    .whatsapp {
-      background: #25D366;
+      margin-top: 10px;
       color: white;
     }
 
-    .whatsapp:hover {
-      background: #1ebe5d;
+    .done {
+      background: red;
     }
 
     .download {
-      background: #000;
+      background: black;
+    }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      width: 280px;
+      animation: pop 0.3s ease;
+    }
+
+    @keyframes pop {
+      from {transform: scale(0.7); opacity: 0;}
+      to {transform: scale(1); opacity: 1;}
+    }
+
+    .modal-box h3 {
+      color: red;
+      margin-bottom: 10px;
+    }
+
+    .modal-box p {
+      font-size: 14px;
+      color: #444;
+    }
+
+    .close-btn {
+      margin-top: 15px;
+      padding: 10px;
+      border: none;
+      background: red;
       color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
     }
 
-    .download:hover {
-      background: #333;
-    }
-
-    .note {
-      font-size: 12px;
-      margin-top: 10px;
-      color: gray;
-    }
   </style>
 </head>
 
@@ -81,35 +109,49 @@
 
   <div class="box">
     <h2>Pay Now</h2>
-    <p>Scan QR and complete your payment</p>
+    <p>Scan QR and complete payment</p>
 
     <div class="qr">
-      <img id="qrImage" src="https://i.ibb.co/GQ8Yzw1s/20260310-134821.jpg" alt="QR Code">
+      <img id="qrImage" src="https://i.ibb.co/GQ8Yzw1s/20260310-134821.jpg">
     </div>
 
-    <button class="btn whatsapp" onclick="sendWhatsApp()">
+    <button class="btn done" onclick="showFailModal()">
       Payment Done
     </button>
 
     <button class="btn download" onclick="downloadQR()">
       Download QR
     </button>
+  </div>
 
-    <p class="note">
-      After payment, send screenshot on WhatsApp
-    </p>
+  <!-- Modal -->
+  <div id="failModal" class="modal">
+    <div class="modal-box">
+      <h3>Payment Failed</h3>
+      <p>No payment detected. Please complete your payment before proceeding.</p>
+      <button class="close-btn" onclick="closeModal()">OK</button>
+    </div>
   </div>
 
   <script>
-    function sendWhatsApp() {
-      let number = "918493824856"; 
-      let message = "Hello, I have completed the payment. Here is my screenshot.";
-      let url = "https://wa.me/" + number + "?text=" + encodeURIComponent(message);
-      window.open(url, "_blank");
+    function showFailModal() {
+      document.getElementById("failModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("failModal").style.display = "none";
     }
 
     function downloadQR() {
       const link = document.createElement('a');
+      link.href = document.getElementById('qrImage').src;
+      link.download = 'payment-qr.jpg';
+      link.click();
+    }
+  </script>
+
+</body>
+</html>      const link = document.createElement('a');
       link.href = document.getElementById('qrImage').src;
       link.download = 'payment-qr.jpg';
       link.click();
